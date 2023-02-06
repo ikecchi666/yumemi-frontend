@@ -39,59 +39,66 @@ const Box = styled.div`
     font-size: ${theme.fonts.size.sm};
   `}
 `
+const ImageBox = styled.div`
+  margin-top: 32px;
+`
 
 const Chart = ({ chartData, chartDataList }: ChartProps) => {
   if (chartData.length && Object.keys(chartData[0]).length > 1) {
     return (
-        <Box>
+      <Box>
         <ResponsiveContainer>
-        <LineChart
-          id="chart"
-          width={700}
-          height={500}
-          data={chartData}
-          margin={{
-            top: 48,
-            right: 16,
-            left: 24,
-            bottom: 16,
-          }}
-        >
-          <Legend />
-          <CartesianGrid strokeDasharray="5 1" />
-          <XAxis
-            dataKey="year"
-            label={{ value: '年度', position: 'insideBottomRight' }}
-            padding={{ right: 65 }}
-          />
-          <YAxis
-            label={{ value: '総人口', position: 'insideTopLeft' }}
-            type="number"
-            domain={[
-              (dataMin: number) =>
-                Math.ceil(dataMin / 100000) * 100000 - 100000,
-              (dataMax: number) => Math.ceil(dataMax / 100000) * 100000,
-            ]}
-            tickCount={9}
-            padding={{ top: 30 }}
-          />
-          {chartDataList.map((item) => {
-            return (
-              <Line
-                key={item.prefName}
-                type="monotone"
-                dataKey={item.prefName}
-                stroke="#8884d8"
-              />
-            )
-          })}
-          <Tooltip />
-        </LineChart>
+          <LineChart
+            id="chart"
+            width={700}
+            height={500}
+            data={chartData}
+            margin={{
+              top: 48,
+              right: 16,
+              left: 24,
+              bottom: 16,
+            }}
+          >
+            <Legend />
+            <CartesianGrid strokeDasharray="5 1" />
+            <XAxis
+              dataKey="year"
+              label={{ value: '年度', position: 'insideBottomRight' }}
+              padding={{ right: 65 }}
+            />
+            <YAxis
+              label={{ value: '総人口', position: 'insideTopLeft' }}
+              type="number"
+              domain={[
+                (dataMin: number) =>
+                  Math.ceil(dataMin / 100000) * 100000 - 100000,
+                (dataMax: number) => Math.ceil(dataMax / 100000) * 100000,
+              ]}
+              tickCount={9}
+              padding={{ top: 30 }}
+            />
+            {chartDataList.map((item) => {
+              return (
+                <Line
+                  key={item.prefName}
+                  type="monotone"
+                  dataKey={item.prefName}
+                  stroke="#8884d8"
+                />
+              )
+            })}
+            <Tooltip />
+          </LineChart>
         </ResponsiveContainer>
-        </Box>
+      </Box>
     )
   } else {
-    return <div>ここにチャートが表示されるよ</div>
+    return (
+      <ImageBox>
+        <img src="/empty_chart.jpg" alt="ここにチャートが表示されるよ" />
+      </ImageBox>
+    )
   }
 }
 

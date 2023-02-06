@@ -1,9 +1,13 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
+import styled from 'styled-components'
 import CheckBoxItem from '@/components/molecules/CheckBoxItem'
 import Chart from '@/components/organisms/chart'
-import { PerYearResponseEntity, PrefecturePerYearEntity, PrefecturesResponseListEntity } from '@/type/prefecturePeople'
-import styled from 'styled-components'
+import {
+  PerYearResponseEntity,
+  PrefecturePerYearEntity,
+  PrefecturesResponseListEntity,
+} from '@/type/prefecturePeople'
 
 const Box = styled.div`
   ${({ theme }) => theme.breakpoint.base`
@@ -28,12 +32,11 @@ const emptyChartData = [
 ]
 
 export default function Home() {
-  const [prefectures, setPreFectures] = useState<PrefecturesResponseListEntity | null>(
-    null,
-  )
-  const [chartDataList, setChartDataList] = useState<PrefecturePerYearEntity[] | []>(
-    [],
-  )
+  const [prefectures, setPreFectures] =
+    useState<PrefecturesResponseListEntity | null>(null)
+  const [chartDataList, setChartDataList] = useState<
+    PrefecturePerYearEntity[] | []
+  >([])
   const [selectedPreCodes, setSelectedPreCodes] = useState<number[] | []>([])
   const [selectedPreCode, setSelectedPreCode] = useState<number>(0)
   const [chartData, setChartData] = useState<any[]>(emptyChartData)
@@ -125,6 +128,9 @@ export default function Home() {
 
   return (
     <>
+      <header>
+        <h2>都道府県別人口統計</h2>
+      </header>
       <main>
         <Box>
           {prefectures?.result.map((prefecture) => {

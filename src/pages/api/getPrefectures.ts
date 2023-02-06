@@ -1,7 +1,6 @@
-import { PrefecturesEntity } from '@/type/prefecturePeople'
 import axios from 'axios'
 import type { NextApiRequest, NextApiResponse } from 'next'
-
+import { PrefecturesEntity } from '@/type/prefecturePeople'
 
 const getPrefectures = async (
   req: NextApiRequest,

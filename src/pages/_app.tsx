@@ -1,8 +1,8 @@
 import '@/styles/globals.css'
-import { theme } from '@/theme/theme'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
+import { theme } from '@/theme/theme'
 
 const GlobalStyle = createGlobalStyle`
 html,
@@ -15,8 +15,18 @@ main {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 6rem;
+  padding: 2rem;
   min-height: 100vh;
+}
+header {
+  height: 90px;
+  width: 100%;
+  margin:auto;
+  display: flex;
+  justify-content: center;
+  padding-top: 32px;
+  color: white;
+  background-color: black;
 }
 `
 

@@ -1,6 +1,6 @@
-import { PerYearResponseListEntity } from '@/type/prefecturePeople'
 import axios from 'axios'
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { PerYearResponseListEntity } from '@/type/prefecturePeople'
 
 const getPrefectures = async (
   req: NextApiRequest,

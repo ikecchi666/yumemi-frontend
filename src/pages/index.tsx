@@ -3,37 +3,7 @@ import { useState, useEffect } from 'react'
 import CheckBoxItem from '@/components/molecules/CheckBoxItem'
 import Chart from '@/components/organisms/chart'
 import styles from '@/styles/Home.module.css'
-
-type PrefecturesResponse = {
-  message: null
-  result: {
-    prefCode: number
-    prefName: string
-  }[]
-}
-
-type PerYearResponse = {
-  message: null
-  result: {
-    data: PerYearContents[]
-  }
-}
-
-type PerYearContents = {
-  label: string
-  data: PerYear[]
-}
-
-type PerYear = {
-  year: number
-  value: number
-}
-
-export type PrefecturePerYear = {
-  prefCode: number
-  prefName: string
-  data: PerYear[]
-}
+import { PerYearResponseEntity, PrefecturePerYearEntity, PrefecturesResponseListEntity } from '@/type/prefecturePeople'
 
 const emptyChartData = [
   { year: 1970 },
@@ -45,10 +15,10 @@ const emptyChartData = [
 ]
 
 export default function Home() {
-  const [prefectures, setPreFectures] = useState<PrefecturesResponse | null>(
+  const [prefectures, setPreFectures] = useState<PrefecturesResponseListEntity | null>(
     null,
   )
-  const [chartDataList, setChartDataList] = useState<PrefecturePerYear[] | []>(
+  const [chartDataList, setChartDataList] = useState<PrefecturePerYearEntity[] | []>(
     [],
   )
   const [selectedPreCodes, setSelectedPreCodes] = useState<number[] | []>([])
@@ -70,7 +40,7 @@ export default function Home() {
     getPrefectures()
   }, [])
 
-  const formatChartData = (perYear: PerYearResponse) => {
+  const formatChartData = (perYear: PerYearResponseEntity) => {
     // レスポンスから必要なデータを抜き出す
     const selectedPreName =
       prefectures?.result.find((item) => item.prefCode === selectedPreCode)
@@ -125,7 +95,7 @@ export default function Home() {
         })
         .then((response) => {
           if (response.data?.result) {
-            const perYear: PerYearResponse = response.data
+            const perYear: PerYearResponseEntity = response.data
             formatChartData(perYear)
           }
         })

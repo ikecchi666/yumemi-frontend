@@ -1,14 +1,11 @@
+import { PrefecturesEntity } from '@/type/prefecturePeople'
 import axios from 'axios'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-type Prefectures = {
-  prefCode: number
-  prefName: string
-}
 
 const getPrefectures = async (
   req: NextApiRequest,
-  res: NextApiResponse<Prefectures>,
+  res: NextApiResponse<PrefecturesEntity>,
 ) => {
   const response = await axios.get(
     'https://opendata.resas-portal.go.jp/api/v1/prefectures',

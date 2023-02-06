@@ -4,10 +4,12 @@ import {
   Legend,
   Line,
   LineChart,
+  ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
 } from 'recharts'
+import styled from 'styled-components'
 
 export type PerYear = {
   year: number
@@ -25,20 +27,34 @@ interface ChartProps {
   chartDataList: PrefecturePerYear[]
 }
 
+const Box = styled.div`
+  ${({ theme }) => theme.breakpoint.base`
+    height: 500px;
+    width: 370px;
+    font-size: ${theme.fonts.size.xs};
+  `}
+  ${({ theme }) => theme.breakpoint.sm`
+    height: 500px;
+    width: 620px;
+    font-size: ${theme.fonts.size.sm};
+  `}
+`
+
 const Chart = ({ chartData, chartDataList }: ChartProps) => {
   if (chartData.length && Object.keys(chartData[0]).length > 1) {
     return (
-      <div className="container">
+        <Box>
+        <ResponsiveContainer>
         <LineChart
           id="chart"
           width={700}
           height={500}
           data={chartData}
           margin={{
-            top: 50,
-            right: 50,
-            left: 50,
-            bottom: 50,
+            top: 48,
+            right: 16,
+            left: 24,
+            bottom: 16,
           }}
         >
           <Legend />
@@ -46,9 +62,8 @@ const Chart = ({ chartData, chartDataList }: ChartProps) => {
           <XAxis
             dataKey="year"
             label={{ value: '年度', position: 'insideBottomRight' }}
-            padding={{ right: 80 }}
+            padding={{ right: 65 }}
           />
-          Math.ceil(num/10)) * 10
           <YAxis
             label={{ value: '総人口', position: 'insideTopLeft' }}
             type="number"
@@ -58,7 +73,7 @@ const Chart = ({ chartData, chartDataList }: ChartProps) => {
               (dataMax: number) => Math.ceil(dataMax / 100000) * 100000,
             ]}
             tickCount={9}
-            padding={{ top: 50 }}
+            padding={{ top: 30 }}
           />
           {chartDataList.map((item) => {
             return (
@@ -72,7 +87,8 @@ const Chart = ({ chartData, chartDataList }: ChartProps) => {
           })}
           <Tooltip />
         </LineChart>
-      </div>
+        </ResponsiveContainer>
+        </Box>
     )
   } else {
     return <div>ここにチャートが表示されるよ</div>

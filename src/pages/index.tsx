@@ -2,8 +2,21 @@ import axios from 'axios'
 import { useState, useEffect } from 'react'
 import CheckBoxItem from '@/components/molecules/CheckBoxItem'
 import Chart from '@/components/organisms/chart'
-import styles from '@/styles/Home.module.css'
 import { PerYearResponseEntity, PrefecturePerYearEntity, PrefecturesResponseListEntity } from '@/type/prefecturePeople'
+import styled from 'styled-components'
+
+const Box = styled.div`
+  ${({ theme }) => theme.breakpoint.base`
+    width: 370px;
+    margin-left: 24px;
+    font-size: ${theme.fonts.size.xs};
+  `}
+  ${({ theme }) => theme.breakpoint.sm`
+    width: 620px;
+    margin-left: 24px;
+    font-size: ${theme.fonts.size.sm};
+  `}
+`
 
 const emptyChartData = [
   { year: 1970 },
@@ -112,8 +125,8 @@ export default function Home() {
 
   return (
     <>
-      <main className={styles.main}>
-        <div>
+      <main>
+        <Box>
           {prefectures?.result.map((prefecture) => {
             return (
               <CheckBoxItem
@@ -124,7 +137,7 @@ export default function Home() {
               />
             )
           })}
-        </div>
+        </Box>
         <div>
           <Chart chartData={chartData} chartDataList={chartDataList} />
         </div>

@@ -10,9 +10,36 @@ export interface CheckBoxProps
 }
 
 const Label = styled.label`
-  cursor: pointer;
-  margin-left: 6px;
-  user-select: none;
+  ${({ theme }) => theme.breakpoint.base`
+    cursor: pointer;
+    user-select: none;
+    font-size: ${theme.fonts.size.xs};
+  `}
+  ${({ theme }) => theme.breakpoint.sm`
+    cursor: pointer;
+    margin-left: 16px;
+    user-select: none;
+    font-size: ${theme.fonts.size.sm};
+  `}
+`
+
+const CheckBox = styled.input`
+  ${({ theme }) => theme.breakpoint.base`
+    cursor: pointer;
+    margin-right: 6px;
+    user-select: none;
+    font-size: ${theme.fonts.size.xs};
+  `}
+  ${({ theme }) => theme.breakpoint.sm`
+    cursor: pointer;
+    margin-right: 16px;
+    user-select: none;
+    font-size: ${theme.fonts.size.sm};
+  `}
+`
+
+const Span = styled.span`
+  white-space: nowrap;
 `
 
 const CheckBoxItem = (props: CheckBoxProps) => {
@@ -26,15 +53,15 @@ const CheckBoxItem = (props: CheckBoxProps) => {
 
   return (
     <>
-      <span>
+      <Span>
         <Label htmlFor="check">{label}</Label>
-        <input
+        <CheckBox
           type="checkbox"
           id={id}
           checked={isChecked}
           onChange={onChangeCheckBox}
         />
-      </span>
+      </Span>
     </>
   )
 }
